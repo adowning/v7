@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "_default": {
+      "link": "andrews-dev"
+    },
+    "andrews-dev": {
+      "applicationId": "4tsEITXrE7u1aITRn79yADJMADlfKFyJACAknOUI"
+    }
+  }
+}

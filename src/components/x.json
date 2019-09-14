@@ -1,0 +1,9 @@
+{ 
+"author": 
+    { "username": "asdf", "createdAt": "2019-09-11T22:53:41.166Z", "updatedAt": "2019-09-11T22:53:46.189Z", "email": "asdf@asdf.com", 
+    "ACL": { "*": { "read": true }, "M5shF3FoQT": { "read": true, "write": true } }, 
+    "sessionToken": "r:63497ac0b119146e99ec42983ea8b8b5", "objectId": "M5shF3FoQT", "__type": "Object", "className": "_User" 
+}, 
+"title": "x", "finished": false, 
+"createdAt": "2019-09-11T23:08:44.711Z", "updatedAt": "2019-09-11T23:08:44.711Z", "objectId": "RPpZwtLcxZ" 
+}
