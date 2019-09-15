@@ -5,7 +5,7 @@
       "module": "esnext",
       "jsx": "preserve",
       "importHelpers": true,
-
+      
       "moduleResolution": "node",
       "esModuleInterop": true,
       "allowSyntheticDefaultImports": true,

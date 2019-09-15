@@ -1,0 +1,18 @@
+{
+    "transport": {
+      "module": "ssh",
+      "host": "ashdevtools.com",
+      "username": "Asdfasdf1234",
+      "password": "Asdfasdf1234",
+      "remotePath": "/www/ashdevtools.com/updates",
+      "remoteUrl": "http://ashdevtools.com/updates"
+    },
+    "fields": { 
+      "readme": "The first version"
+    },
+
+    "updatesJsonUrl": "http://ashdevtools.com/updates/update.json",
+    "except": [
+      "prod-v0.5.0"
+    ]
+  }
