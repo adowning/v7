@@ -1,11 +1,6 @@
-import { App, ipcMain, IpcMessageEvent, IpcMainEvent } from 'electron';
+import { App, ipcMain, IpcMainEvent } from 'electron';
 import { AndrewsDesktop } from './andrews-desktop';
-import Parse from 'parse/node'
-Parse.enableLocalDatastore()
-Parse.initialize("andrews_prod", "JSAsdfasdf1234");
 
-
-Parse.serverURL = 'https://parser-parse.ashdevtools.com'
 /**
  * Application entry point.
  */
@@ -23,7 +18,7 @@ export default class Main {
 
     // Initialize.
     Main.application = application;
-    // Main.application.on('activate', Main.onActivate);process.env.WEBPACK_DEV_SERVER_URL
+    Main.application.on('activate', Main.onActivate);
     Main.application.on('ready', Main.onReady);
     Main.application.on('window-all-closed', Main.onWindowAllClosed);
     Main.application.setName(AndrewsDesktop.AppName);
@@ -55,7 +50,6 @@ export default class Main {
 
     });
 
-
   }
 
   /** The electron application, */
@@ -74,17 +68,27 @@ export default class Main {
    */
   private static createApp(): AndrewsDesktop {
 
-    // const currentUser = Parse.User.current()
-    // console.log(currentUser)
     const mainApp = new AndrewsDesktop();
     mainApp.on('closed', Main.onClosed);
-    mainApp.openWindow();
-    return mainApp
-
+    // mainApp.openWindow();
+    return mainApp;
 
   }
 
+  /**
+   * Handles the app's 'activate' event. Emitted when the application is activated (macOS only).
+   *
+   * @private
+   * @static
+   * @memberof Main
+   */
+  private static onActivate(): void {
 
+    if (Main.andrewsApp == null) {
+      Main.andrewsApp = Main.createApp();
+    }
+
+  }
 
   /**
    * Handles the window's 'close' event. Emitted when the window is going to be closed.
@@ -94,7 +98,7 @@ export default class Main {
    * @memberof Main
    */
   private static onClosed(): void {
-    console.log('inside main.tx onclosed')
+
     Main.andrewsApp = null;
 
   }

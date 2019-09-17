@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, screen } from 'electron'
 import { EventEmitter } from 'events'
 import * as path from 'path'
 import * as url from 'url'
@@ -10,6 +10,8 @@ import { Log } from './log'
 import { Notifier } from './notifier'
 import { ToastMessenger } from './toast-messenger'
 import { Updater } from './updater'
+import Store from 'electron-store'
+
 import {
   createProtocol,
   installVueDevtools
@@ -28,6 +30,19 @@ export class AndrewsDesktop extends EventEmitter {
    *
    * @memberof AndrewsDesktop
    */
+  public config;
+  public forceQuit;
+  public unreadMessages;
+  public userEmail;
+  public window;
+  public notifier;
+  public tray;
+  public updater;
+  public messenger;
+  public AppName;
+  public __static;
+  public loadingWindow;
+
   constructor() {
     super()
     /** The application config. */
@@ -81,12 +96,14 @@ export class AndrewsDesktop extends EventEmitter {
   getUpdater() {
     return this.updater
   }
+
+
   /**
    * Opens the browser window.
    *
    * @memberof AndrewsDesktop
    */
-  async openWindow() {
+  async openWindow(user) {
     new ApplicationMenu(this)
 
     // andrewsApp = Main.createApp();
@@ -94,12 +111,24 @@ export class AndrewsDesktop extends EventEmitter {
       // Install Vue Devtools
       try {
         //   await installVueDevtools()
+        const settingsStore = new Store<any>({ name: 'settings' })
+
+        const position = settingsStore.get('window', {})
+
         this.window = new BrowserWindow({
-          width: 800,
-          height: 600,
+          width: 1200,
+          height: 755,
+          x: position.x,
+          y: position.y,
+          maximizable: false,
+          // frame: false,
+          darkTheme: true,
+          backgroundColor: '#111',
           webPreferences: {
-            nodeIntegration: true
-          }
+            webSecurity: false,
+            allowRunningInsecureContent: false,
+            nodeIntegration: true,
+          },
         })
         if (process.env.WEBPACK_DEV_SERVER_URL) {
           // Load the url of the dev server if in development mode
@@ -108,12 +137,13 @@ export class AndrewsDesktop extends EventEmitter {
         } else {
           createProtocol('app')
           // Load the index.html when not in development
-          withis.windown.loadURL('app://./index.html')
+          this.window.loadURL('app://./index.html')
         }
 
-        this.window.on('closed', () => {
-          this.window = null
-        })
+        // this.window.on('closed', () => {
+        //   console.log('CLOSED!')
+        //   this.window = null
+        // })
       } catch (e) {
         console.error('Vue Devtools failed to install:', e.toString())
       }
@@ -143,6 +173,7 @@ export class AndrewsDesktop extends EventEmitter {
     //     }));
     // }
   }
+
   /**
    * Sets the number of currently unread messages.
    *
@@ -181,7 +212,7 @@ export class AndrewsDesktop extends EventEmitter {
   setUserEmail(userEmail) {
     this.userEmail = userEmail
     this.window.setTitle(
-      util.format('%s | %s', this.userEmail, AndrewsDesktop.AppName)
+      // util.format('%s | %s', this.userEmail, AndrewsDesktop.AppName)
     )
     this.tray.setUserEmail(this.userEmail)
     // Done.
@@ -201,6 +232,8 @@ export class AndrewsDesktop extends EventEmitter {
     // ... and return the result.
     return window
   }
+
+
   /**
    * Creates and returns the options for the main window.
    *
@@ -231,6 +264,7 @@ export class AndrewsDesktop extends EventEmitter {
    */
   onClose(e) {
     // Update user configuration.
+    console.log('closing window')
     const windowBounds = this.window.getBounds()
     this.config.setWindowBounds(windowBounds)
     // Stop here if quitting the application is intended.
@@ -261,7 +295,7 @@ export class AndrewsDesktop extends EventEmitter {
     await installVueDevtools()
   }
 }
-AndrewsDesktop.AppHomepage = 'http://ashdevtools.com'
-AndrewsDesktop.AppName = 'Andrews Admin'
-AndrewsDesktop.AppVersion = '1.0.0'
-AndrewsDesktop.IsDevelopment = process.env.NODE_ENV !== 'production'
+// AndrewsDesktop.AppHomepage = 'http://ashdevtools.com'
+// AndrewsDesktop.AppName = 'Andrews Admin'
+// AndrewsDesktop.AppVersion = '1.0.0'
+// AndrewsDesktop.IsDevelopment = process.env.NODE_ENV !== 'production'

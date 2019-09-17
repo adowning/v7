@@ -14,23 +14,32 @@ const router = new Router({
       component: Login
     },
     {
-      path: '/',
+      path: '/profile',
       name: 'profile',
       component: () => import('./components/Profile.vue'),
       props: true,
-    meta: {
-      requiresAuth: true
-    }
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/',
+      name: 'timecardlist',
+      component: () => import('@/components/TimecardList.vue'),
+      props: true,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/',
       name: 'register',
       component: () => import('./components/RegisterForm.vue'),
       props: true,
-    meta: {
-      requiresAuth: true
+      meta: {
+        requiresAuth: true
+      }
     }
-  }
     // {
     //   path: '/sessions/:id/detail',
     //   name: 'details',
@@ -77,14 +86,14 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-//   const currentUser = firebase.auth().currentUser;
-var currentUser;
+  //   const currentUser = firebase.auth().currentUser;
+  var currentUser;
 
-try{
-   currentUser =  router.app.$parse.user;
-}catch(e){
-  console.log('still loading ...')
-}
+  try {
+    currentUser = router.app.$parse.user;
+  } catch (e) {
+    console.log('still loading ...')
+  }
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   console.log(requiresAuth)
   console.log(currentUser)

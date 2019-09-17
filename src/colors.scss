@@ -1,0 +1,131 @@
+
+@function color($color, $shade) {
+    @if ($shade == 0) {
+      @return darken($color, 10%);
+    } @else if ($shade == 100) {
+      @return darken($color, 7.5%);
+    } @else if ($shade == 200) {
+      @return darken($color, 5%);
+    } @else if($shade == 300) {
+      @return darken($color, 2.5%);
+    } @else if($shade == 350) {
+      @return darken($color, 1.25%);
+    } @else if ($shade == 400) {
+      @return $color;
+    } @else if ($shade == 450) {
+      @return lighten($color, 1.25%);
+    } @else if ($shade == 500) {
+      @return lighten($color, 2.5%);
+    } @else if ($shade == 600) {
+      @return lighten($color, 5%);
+    } @else if ($shade == 700) {
+      @return lighten($color, 7.5%);
+    } @else if ($shade == 800) {
+      @return lighten($color, 10%);
+    }
+  }
+  
+
+  $black: #000000;
+  $ebony-clay: #222c3c;
+  $ebony-clay-2: #273142;
+  $mirage: #1b2431;
+  $oxford-blue: #313d4f;
+  $woodsmoke: #171819;
+  
+  $background: #1b2431;
+  
+  // BLUE
+  
+  $azure-radiance: #0093ee;
+  $dodger-blue: #2da1f8;
+  
+  // GREEN
+  
+  $apple: #4ece3d;
+  $malachite: #1bb934;
+  
+  // GREY
+  
+  $nepal: #8eacc5;
+  $regent-st-blue: #a9c7df;
+  
+  // ORANGE
+  
+  $sunglow: #ffc02a;
+  $sun: #ffb610;
+  
+  // PURPLE
+  
+  $portage: #ab7ef6;
+  
+  // RED
+  
+  $cinnabar: #e54124;
+  $crimson: #e0102b;
+  
+  // TURQUOISE
+  
+  $java: #26c2c9;
+  
+  // WHITE
+  
+  $athens-gray: #e6eaee;
+  $barley-white: #fff5cd;
+  $white: #ffffff;
+  
+  // SOCIAL
+  
+  $facebook: #3b5998;
+  $google: #db4437;
+  $messenger: #0084ff;
+  $twitter: #1da1f2;
+  
+  // DATASETS
+  
+  $levelColors: (
+    "description": $nepal,
+    "error": $crimson,
+    "info": $azure-radiance,
+    "success": $malachite,
+    "warning": $sun
+  );
+  
+  $mainColors: (
+    "black": $oxford-blue,
+    "blue": $azure-radiance,
+    "green": $malachite,
+    "grey": $regent-st-blue,
+    "orange": $sun,
+    "purple": $portage,
+    "red": $crimson,
+    "turquoise": $java,
+    "white": $white
+  );
+  
+  $socialColors: (
+    "facebook": $facebook,
+    "google": $google,
+    "messenger": $messenger,
+    "twitter": $twitter
+  );
+  
+  $statusColors: (
+    "error": $crimson,
+    "normal": $azure-radiance,
+    "success": $malachite,
+    "warning": $sunglow
+  );
+
+  $success: $malachite;
+  $warning: $sun;
+  $danger: $crimson;
+  
+  $vlc: #e85e00;
+  
+  $shadow: 1px 4px 10px rgba(0, 0, 0, 0.5);
+  $outline: -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000,
+    1px 1px 1px #000;
+  
+  $outline-light: -1px -1px 0 rgba(0, 0, 0, 0.5), 1px -1px 0 rgba(0, 0, 0, 0.5),
+    -1px 1px 0 rgba(0, 0, 0, 0.5), 1px 1px 0 rgba(0, 0, 0, 0.5);

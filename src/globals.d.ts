@@ -1,10 +1,10 @@
-import Launcher from './main/Launcher'
-import Application from './main/Application'
+// import Launcher from './main/Launcher'
+// import Application from './main/Application'
 
-declare global {
-  interface Global {
-  application: Application,
-launcher: Launcher
-}
+// declare global {
+//   interface Global {
+//   application: Application,
+// launcher: Launcher
+// }
 
-}
+// }
