@@ -71,7 +71,7 @@
 
           <v-list class="transparent">
             <v-timeline align-top-right align-right dense>
-              <v-list-item v-for="item in events" :key="item.objectId">
+              <v-list-item v-for="item in eventLogs" :key="item.objectId">
                 <!-- <v-list-item-title>{{ item.day }}</v-list-item-title>
 
             <v-list-item-icon>
@@ -81,12 +81,12 @@
             <v-list-item-subtitle class="text-right">{{ item.temp }}</v-list-item-subtitle>
                 </v-list-item>-->
                 <div :v-if="item.type == 'Timecard'">
-                  <v-timeline-item :v-if="!clockOut" color="green" small>
+                  <v-timeline-item :v-if="!item.details.clockOut" color="green" small>
                     <v-row justify="space-between">
                       <v-col>
                         <strong>Clock In</strong>
                       </v-col>
-                      <v-col class="text-right">{{ item.clockInTime | moment("ddd DD-MM") }}</v-col>
+                      <v-col class="text-right">{{ item.details.clockIn | moment("ddd DD-MM") }}</v-col>
                     </v-row>
                   </v-timeline-item>
                 </div>
@@ -149,15 +149,15 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import moment from "moment";
-import Event from "@/models/Event";
+import EventLog from "@/models/EventLog";
 
 import toastr from "toastr";
 import { extend } from "vue-parse";
 
 @Component({
   parse: {
-    events: extend({
-      object: Event,
+    eventLogs: extend({
+      object: EventLog,
       subscribe: true
       // sort: (a.attributes.clockIn, b.attributes.clockIn ) => a.attributes.clockIn - b.attributes.clockIn
       // result: r => r.author.getUsername()
@@ -206,19 +206,19 @@ export default class extends Vue {
   //   }
   // }
 
-  update(event: Event, state: boolean) {
+  update(eventLog: EventLog, state: boolean) {
     if (!this.$parse.user.attributes.isManager) {
       toastr.error(`Only managers can approve Events`);
       return;
     }
     try {
       // event.approved = state;
-      if (state == true && !event.attributes.clockOut) {
+      if (state == true && !eventLog.employee.attributes.username) {
         toastr.error(`Cannot approve active Events`);
         return;
       }
-      event.save();
-      toastr.success(`${event.id} successfully updated`);
+      eventLog.save();
+      toastr.success(`${eventLog.objectId} successfully updated`);
     } catch (e) {
       toastr.error(`Error while updating event: ${e.message}`);
     }

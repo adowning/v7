@@ -14,7 +14,7 @@ const router = new Router({
       component: Login
     },
     {
-      path: '/profile',
+      path: '/',
       name: 'profile',
       component: () => import('./components/Profile.vue'),
       props: true,
@@ -23,7 +23,7 @@ const router = new Router({
       }
     },
     {
-      path: '/',
+      path: '/timecardlist',
       name: 'timecardlist',
       component: () => import('@/components/TimecardList.vue'),
       props: true,
