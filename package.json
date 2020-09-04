@@ -35,7 +35,7 @@
     "vue": "^2.6.6",
     "vue-apollo": "^3.0.0-rc.5",
     "vue-class-component": "^6.0.0",
-    "vue-moment": "^4.0.0",
+    "vue-moment": "^4.1.0",
     "vue-parse": "^0.1.0",
     "vue-property-decorator": "^8.1.1",
     "vue-router": "^3.1.3",
