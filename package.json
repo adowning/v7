@@ -31,7 +31,7 @@
     "electron-updater": "^4.1.2",
     "electron-util": "^0.12.1",
     "log4js": "^5.1.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "vue": "^2.6.6",
     "vue-apollo": "^3.0.0-rc.5",
     "vue-class-component": "^6.0.0",
