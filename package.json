@@ -50,7 +50,7 @@
     "@vue/cli-plugin-typescript": "^3.5.0",
     "@vue/cli-plugin-vuex": "^4.0.0-alpha.4",
     "@vue/cli-service": "^3.5.0",
-    "electron": "^6.0.0",
+    "electron": "^18.3.7",
     "electron-simple-publisher": "^0.6.2",
     "sass": "^1.17.4",
     "sass-loader": "^7.1.0",
